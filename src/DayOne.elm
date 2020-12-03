@@ -1,11 +1,15 @@
-module DayOne exposing (findProduct)
+module DayOne exposing (NumberOfEntries(..), findProduct)
 
 
-findProduct : String -> Maybe Int
-findProduct =
+type NumberOfEntries
+    = Two
+    | Three
+
+
+findProduct : NumberOfEntries -> String -> Maybe Int
+findProduct numberOfEntries =
     parseInput
-        >> findEntries
-        >> multiply
+        >> findMultiples numberOfEntries
 
 
 parseInput : String -> List Int
@@ -14,22 +18,70 @@ parseInput =
         >> List.filterMap String.toInt
 
 
-findEntries : List Int -> Maybe ( Int, Int )
-findEntries list =
-    List.indexedMap (findSum list) list
+findMultiples : NumberOfEntries -> List Int -> Maybe Int
+findMultiples numberOfEntries list =
+    case numberOfEntries of
+        Two ->
+            findTwoEntries list
+                |> multiplyTwo
+
+        Three ->
+            findThreeEntries list
+                |> multiplyThree
+
+
+findTwoEntries : List Int -> Maybe ( Int, Int )
+findTwoEntries list =
+    List.indexedMap (findTwo list) list
         |> List.filterMap identity
         |> List.head
 
 
-findSum : List Int -> Int -> Int -> Maybe ( Int, Int )
-findSum list index element =
-    findInList (\el -> el + element == 2020) (List.drop (index + 1) list)
-        |> Maybe.map (\sum -> ( element, sum ))
+findTwo : List Int -> Int -> Int -> Maybe ( Int, Int )
+findTwo list index element =
+    let
+        subsequentElements =
+            List.drop (index + 1) list
+    in
+    findInList (\el -> el + element == 2020) subsequentElements
+        |> Maybe.map (\el -> ( element, el ))
 
 
-multiply : Maybe ( Int, Int ) -> Maybe Int
-multiply =
+findThreeEntries : List Int -> Maybe ( Int, Int, Int )
+findThreeEntries list =
+    List.indexedMap (findThree list) list
+        |> List.filterMap identity
+        |> List.head
+
+
+findThree : List Int -> Int -> Int -> Maybe ( Int, Int, Int )
+findThree list index element =
+    let
+        subsequentElements =
+            List.drop (index + 1) list
+    in
+    subsequentElements
+        |> List.indexedMap
+            (\sndIndex snd ->
+                findInList (\thr -> element + snd + thr == 2020) subsequentElements
+                    |> Maybe.map (\thr -> ( snd, thr ))
+            )
+        |> List.filterMap identity
+        |> List.head
+        |> Maybe.map
+            (\( snd, thr ) ->
+                ( element, snd, thr )
+            )
+
+
+multiplyTwo : Maybe ( Int, Int ) -> Maybe Int
+multiplyTwo =
     Maybe.map (\( fst, snd ) -> fst * snd)
+
+
+multiplyThree : Maybe ( Int, Int, Int ) -> Maybe Int
+multiplyThree =
+    Maybe.map (\( fst, snd, thd ) -> fst * snd * thd)
 
 
 findInList : (Int -> Bool) -> List Int -> Maybe Int

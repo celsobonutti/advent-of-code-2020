@@ -1206,5 +1206,4 @@ dayTwo =
 8-9 n: rnsnvlrqdq
 4-7 f: ffwnzdf
 15-18 x: ngxxvqwxzlhxwpxxxz
-13-15 w: nwwwwwqwwwwwtww    
-"""
+13-15 w: nwwwwwqwwwwwtww"""

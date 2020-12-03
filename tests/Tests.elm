@@ -1,9 +1,8 @@
 module Tests exposing (dayOne, dayTwo)
 
 import DayOne exposing (NumberOfEntries(..), findProduct)
-import DayTwo exposing (countValids)
+import DayTwo
 import Expect exposing (Expectation)
-import Fuzz exposing (Fuzzer, int, list, string)
 import Input
 import Test exposing (..)
 
@@ -28,5 +27,8 @@ dayTwo =
     describe "Day Two"
         [ test "first puzzle" <|
             \() ->
-                Expect.equal 483 (DayTwo.countValids Input.dayTwo)
+                Expect.equal 483 (DayTwo.countValidsAccordingToFirstPolicty Input.dayTwo)
+        , test "second puzzle" <|
+            \() ->
+                Expect.equal 524 (DayTwo.countValidsAccordingToSecondPolicty Input.dayTwo)
         ]

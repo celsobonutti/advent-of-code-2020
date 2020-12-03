@@ -1,6 +1,7 @@
-module Tests exposing (dayOne, dayTwo)
+module Tests exposing (dayOne, dayThree, dayTwo)
 
 import DayOne exposing (NumberOfEntries(..), findProduct)
+import DayThree
 import DayTwo
 import Expect exposing (Expectation)
 import Input
@@ -31,4 +32,16 @@ dayTwo =
         , test "second puzzle" <|
             \() ->
                 Expect.equal 482 (DayTwo.countValidsAccordingToSecondPolicty Input.dayTwo)
+        ]
+
+
+dayThree : Test
+dayThree =
+    describe "Day Three"
+        [ test "first puzzle" <|
+            \() ->
+                Expect.equal 257 (DayThree.firstPart Input.dayThree)
+        , test "second puzzle" <|
+            \() ->
+                Expect.equal 1744787392 (DayThree.secondPart Input.dayThree)
         ]

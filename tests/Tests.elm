@@ -30,5 +30,5 @@ dayTwo =
                 Expect.equal 483 (DayTwo.countValidsAccordingToFirstPolicty Input.dayTwo)
         , test "second puzzle" <|
             \() ->
-                Expect.equal 524 (DayTwo.countValidsAccordingToSecondPolicty Input.dayTwo)
+                Expect.equal 482 (DayTwo.countValidsAccordingToSecondPolicty Input.dayTwo)
         ]

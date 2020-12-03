@@ -1,8 +1,8 @@
-module DayOneInput exposing (..)
+module Input exposing (..)
 
 
-input : String
-input =
+dayOne : String
+dayOne =
     """1082
 1770
 1104

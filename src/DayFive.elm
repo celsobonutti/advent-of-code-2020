@@ -1,4 +1,4 @@
-module DayFive exposing (findBiggest)
+module DayFive exposing (findBiggest, findMyId)
 
 import List exposing (head)
 
@@ -29,12 +29,34 @@ columnDivisors =
     }
 
 
+findMyId : String -> Int
+findMyId =
+    parse
+        >> List.map calculateId
+        >> List.sort
+        >> findMissing
+
+
 findBiggest : String -> Int
 findBiggest =
     parse
         >> List.map calculateId
         >> List.maximum
         >> Maybe.withDefault 0
+
+
+findMissing : List Int -> Int
+findMissing list =
+    case list of
+        fst :: snd :: tail ->
+            if snd - fst /= 1 then
+                snd - 1
+
+            else
+                findMissing (snd :: tail)
+
+        _ ->
+            127
 
 
 calculateId : List Char -> Int

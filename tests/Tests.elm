@@ -67,4 +67,7 @@ dayFive =
         [ test "first puzzle" <|
             \() ->
                 Expect.equal 874 (DayFive.findBiggest Input.dayFive)
+        , test "second puzzle" <|
+            \() ->
+                Expect.equal 594 (DayFive.findMyId Input.dayFive)
         ]

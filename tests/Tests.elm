@@ -1,5 +1,6 @@
-module Tests exposing (dayFour, dayOne, dayThree, dayTwo)
+module Tests exposing (..)
 
+import DayFive
 import DayFour
 import DayOne exposing (NumberOfEntries(..), findProduct)
 import DayThree
@@ -57,4 +58,13 @@ dayFour =
         , test "second puzzle" <|
             \() ->
                 Expect.equal 179 (DayFour.countValidPassports Input.dayFour)
+        ]
+
+
+dayFive : Test
+dayFive =
+    describe "Day Five"
+        [ test "first puzzle" <|
+            \() ->
+                Expect.equal 874 (DayFive.findBiggest Input.dayFive)
         ]

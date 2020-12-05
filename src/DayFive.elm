@@ -1,4 +1,4 @@
-module DayFive exposing (..)
+module DayFive exposing (findBiggest)
 
 import List exposing (head)
 

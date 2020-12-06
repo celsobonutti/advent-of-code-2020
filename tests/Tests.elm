@@ -3,6 +3,7 @@ module Tests exposing (..)
 import DayFive
 import DayFour
 import DayOne exposing (NumberOfEntries(..), findProduct)
+import DaySix
 import DayThree
 import DayTwo
 import Expect exposing (Expectation)
@@ -70,4 +71,16 @@ dayFive =
         , test "second puzzle" <|
             \() ->
                 Expect.equal 594 (DayFive.findMyId Input.dayFive)
+        ]
+
+
+daySix : Test
+daySix =
+    describe "Day Six"
+        [ test "first puzzle" <|
+            \() ->
+                Expect.equal 6416 (DaySix.count Input.daySix)
+        , test "second puzzle" <|
+            \() ->
+                Expect.equal 3050 (DaySix.countEveryone Input.daySix)
         ]
